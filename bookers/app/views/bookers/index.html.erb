@@ -1,2 +1,51 @@
-<h1>Bookers#index</h1>
-<p>Find me in app/views/bookers/index.html.erb</p>
+<h1>Books</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+    </tr>
+  </thead>
+
+
+
+<% @books.each do |book| %>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        <span><% book.title %></span>
+      </td>
+      <td>
+        <span><%= book.body %></span>
+      </td>
+      <td>
+        <span><%= link_to "show", "bookers_path(@book.id )"%></span>
+        <span><%= link_to "edit", edit_booker_path(@book.id) %> </span>
+        <%= link_to book_path(book.id), "Destroy", method: :delete, data: {confirm: "Are you sure?"} %>
+      </td>
+    </tr>
+  </tbody>
+
+<% end %>
+</table>
+
+<h1>New book</h1>
+
+<%= form_with model: @book, url:"/bookers", local:true do |f| %>
+
+<h4>Title</h4>
+<%= f.text_field :title %>
+<h4>Body</h4>
+<%= f.text_area :body %>
+
+<p><%= f.submit "Create Book" %></p>
+<% end %>
