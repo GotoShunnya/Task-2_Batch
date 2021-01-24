@@ -4,16 +4,22 @@ class BookersController < ApplicationController
 
   def index
     @books= Book.all
+    @book= Book.new
+    
   end
 
   def new
-    @book= Book.new
   end
 
   def create
-    book= Book.new(book_params)
-    book.save
-    redirect_to bookers_path(book.id)
+     book= Book.new(book_params)
+  if book.save
+    redirect_to "/bookers/#{book.id}"
+    flash[:notice]="Book was success fully created"
+
+  else
+       
+  end
   end
 
   def show
@@ -27,7 +33,7 @@ class BookersController < ApplicationController
   def update
     book= Book.find(params[:id])
     book.update(book_parems)
-    redirect_to bookers_path(book)
+    redirect_to
   end
 
   def destroy

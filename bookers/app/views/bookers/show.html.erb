@@ -1,7 +1,9 @@
-<ul>Title</ul>
-<%= @book.title %>
-<ul>Body</ul>
-<%= @book.body %>
+<div class= "notice"> <%= notice %>
+</div>
+<ul>Title:
+<%= @book.title %></ul>
+<ul>Body:
+<%= @book.body %></ul>
 
 <p>
   <%= link_to "Edit", edit_booker_path(@book.id) %>|<%= link_to "back", bookers_path %>

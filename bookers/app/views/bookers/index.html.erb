@@ -28,9 +28,9 @@
         <span><%= book.body %></span>
       </td>
       <td>
-        <span><%= link_to "show", "bookers_path(@book.id )"%></span>
-        <span><%= link_to "edit", edit_booker_path(@book.id) %> </span>
-        <%= link_to book_path(book.id), "Destroy", method: :delete, data: {confirm: "Are you sure?"} %>
+        <span><%= link_to "show", "/bookers/#{book.id}" %></span>
+        <span><%= link_to "edit",edit_booker_path(book.id) %></span>
+        <%= link_to "Destroy", bookers_path(book.id), method: :delete, data: {confirm: "Are you sure?"} %>
       </td>
     </tr>
   </tbody>
