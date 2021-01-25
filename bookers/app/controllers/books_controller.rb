@@ -1,4 +1,4 @@
-class BookersController < ApplicationController
+class BooksController < ApplicationController
   def top
   end
 
@@ -11,14 +11,15 @@ class BookersController < ApplicationController
   end
 
   def create
-     book= Book.new(book_params)
-  if book.save
-    redirect_to "/bookers/#{book.id}"
+     @book= Book.new(book_params)
+  if @book.save
+    redirect_to "/books/#{@book.id}"
     flash[:notice]="Book was success fully created"
 
   else
-     redirect_to "/bookers"
-     
+    @books= Book.all
+     render :index
+
   end
   end
 
@@ -32,15 +33,21 @@ class BookersController < ApplicationController
 
   def update
     book= Book.find(params[:id])
-    book.update(book_params)
-    redirect_to "/bookers/#{book.id}"
+    if book.update(book_params)
+    redirect_to "/books/#{book.id}"
     flash[:notice]="Book was success fully updated"
+
+    else
+     @book= Book.find(params[:id])
+     render :edit
+     flash[:notice]="Book was success fully updated"
+    end
   end
 
   def destroy
    book= Book.find(params[:id])
    book.destroy
-   redirect_to bookers_path
+   redirect_to books_path
    flash[:notice]="Book was successfully destroyed."
   end
 
@@ -51,3 +58,4 @@ class BookersController < ApplicationController
   end
 
 end
+
